@@ -522,7 +522,22 @@ module.exports = {
       // Append RS(record separator)
       append(new Buffer([0x1e]));
     } else {
-      console.error("Code128 not supported on EPSON yet");
+
+      if (settings) {
+
+        if(settings.text == 1) append(config.BARCODE_CODE128_TEXT_1);
+        else if(settings.text == 2) append(config.BARCODE_CODE128_TEXT_2);
+        else if(settings.text == 3) append(config.BARCODE_CODE128_TEXT_3);
+        else if(settings.text == 4) append(config.BARCODE_CODE128_TEXT_4);
+        else append(config.BARCODE_CODE128_TEXT_2);
+
+        if (settings.height && settings.height <= 255) append(new Buffer([0x1d, 0x68, settings.height]));
+        else append(new Buffer([0x1d, 0x68, 120]));
+      }
+      append(new Buffer([0x1d, 0x6b, 74]));
+      append(new Buffer([data.length+1]));
+      append(new Buffer(data));
+      append(new Buffer([0x10]));
     }
   },
 
@@ -846,7 +861,7 @@ var append = function(buff){
 
   // Append character set
   if(!buffer && printerConfig.characterSet) buffer = setInternationalCharacterSet(printerConfig.characterSet);
-  
+
   // Append new buffer
   if (buffer) {
     buffer = Buffer.concat([buffer,buff]);

@@ -79,6 +79,12 @@ module.exports = {
     BARCODE_ITF     : new Buffer([0x1d, 0x6b, 0x05]), // Barcode type ITF
     BARCODE_NW7     : new Buffer([0x1d, 0x6b, 0x06]), // Barcode type NW7
 
+    //BARCODE_CODE128
+
+    // BARCODE_CODE128  : new Buffer([0x1d, 0x6b, 0x04]), // Barcode type CODE39
+    BARCODE_CODE128_TEXT_1  : new Buffer([0x1d, 0x48, 1]), // printer data above the bar code
+    BARCODE_CODE128_TEXT_2  : new Buffer([0x1d, 0x48, 2]), // printer data below the bar code
+    BARCODE_CODE128_TEXT_3  : new Buffer([0x1d, 0x48, 3]), // printer data both above and below the bar code
 
     // QR Code
     QRCODE_MODEL1: new Buffer([0x1d, 0x28, 0x6b, 0x04, 0x00, 0x31, 0x41, 0x31, 0x00]), // Model 1
