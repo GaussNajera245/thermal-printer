@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/devarthurribeiro/node-thermal-printer"
+    "url": "https://github.com/devarthurribeiro/thermal-printer"
   },
   "keywords": [
     "thermal",
@@ -19,9 +19,9 @@
   "author": "Klemen Kastelic <klemen.kast@gmail.com> (http://kastelic.net/), Arthur Ribeiro <devarthurribeiro@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/devarthurribeiro/node-thermal-printer/issues"
+    "url": "https://github.com/devarthurribeiro/thermal-printer/issues"
   },
-  "homepage": "https://github.com/devarthurribeiro/node-thermal-printer",
+  "homepage": "https://github.com/devarthurribeiro/thermal-printer",
   "dependencies": {
     "net": "^1.0.2",
     "node-png": "^0.4.3",
