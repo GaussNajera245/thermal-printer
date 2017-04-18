@@ -3,15 +3,14 @@ var printer = require("./node-thermal-printer");
 printer.init({
   type: 'epson',
   interface: '/dev/usb/lp0',
+  characterSet: 'LATINA',
+  removeSpecialCharacters: false,
+  replaceSpecialCharacters: true,
 });
 
 printer.alignCenter();
 
-// printer.println("Hello world");
-
-// printer.printQR("https://github.com/Klemen1337/node-thermal-printer"); // Print QR code
-// printer.code128("Code128");
-printer.code128("123456789123",{text: 3,height: 256});
+  printer.println("NÃO PREÇO BÚXI");
 
 printer.cut();
 
@@ -22,6 +21,7 @@ printer.execute(function(err){
    console.log("Print done");
   }
 });
+
 
 // var printer = require("./node-thermal-printer");
 //

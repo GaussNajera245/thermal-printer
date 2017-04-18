@@ -54,7 +54,7 @@ module.exports = {
     CHARCODE_NORWAY     : new Buffer([0x1b, 0x52, 0x09]), // Norway
     CHARCODE_DENMARK2   : new Buffer([0x1b, 0x52, 0x0A]), // Denmark II
     CHARCODE_SPAIN2     : new Buffer([0x1b, 0x52, 0x0B]), // Spain II
-    CHARCODE_LATINA     : new Buffer([0x1b, 0x52, 0x0C]), // Latin America
+    CHARCODE_LATINA     : new Buffer([0x1b, 0x74, 0x12]), // Latin America
     CHARCODE_KOREA      : new Buffer([0x1b, 0x52, 0x0D]), // Korea
     CHARCODE_SLOVENIA   : new Buffer([0x1b, 0x52, 0x0E]), // Slovenia
     CHARCODE_CHINA      : new Buffer([0x1b, 0x52, 0x0F]), // China
@@ -143,6 +143,14 @@ module.exports = {
       "ä": 132,
       "ü": 129,
       "Ü": 154,
-      "é": 130
+      "é": 130,
+      "Ç": 128,
+      "ç": 135,
+      "ã": 198,
+      "Ã": 199,
+      "ú": 163,
+      "Ú": 233,
+      "õ": 228,
+      "Õ": 229,
     }
 }
