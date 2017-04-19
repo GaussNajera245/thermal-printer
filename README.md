@@ -11,7 +11,7 @@ sudo apt-get install build-essential
 ```
 
 ```bash
-$ npm install node-thermal-printer
+$ npm install thermal-printer
 ```
 
 
@@ -33,6 +33,7 @@ printer.println("Hello World");                            // Append text with n
 printer.openCashDrawer();                                  // Kick the cash drawer
 printer.cut();                                             // Cuts the paper (if printer only supports one mode use this)
 printer.partialCut();                                      // Cuts the paper leaving a small bridge in middle (if printer supports multiple cut modes)
+printer.simpleCut();                                        // Cuts the paper not feed paper (if printer only supports one mode use this)
 printer.beep();                                            // Sound internal beeper/buzzer (if available)
 printer.upsideDown(true);                                  // Content is printed upside down (rotated 180 degrees)
 
@@ -76,8 +77,8 @@ print.getWidth();                                   // Get number of characters 
 ### Code 128 settings
 ```js
 printer.code128("Code128", {
-    width: "LARGE",          // "SMALL", "MEDIUM", "LARGE",
-    height: 80,              // 50 < x < 80
+    width: "LARGE",          // "SMALL", "MEDIUM", "LARGE", (epson not support)
+    height: 80,              // star: 50 < x < 80, epson: 2 < x < 255 (default 120)
     text: 2,                 // 1 - No text
                              // 2 - Text on bottom
                              // 3 - No text inline
@@ -117,3 +118,4 @@ printer.printImage('./assets/olaii-logo-black.png', function(done){
 ### Tested printers:
 - Star TSP700
 - Rongta RP80US
+- EPSON TM-T20
