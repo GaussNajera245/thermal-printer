@@ -70,7 +70,9 @@ module.exports = {
     append(config.PAPER_PART_CUT);
     append(config.HW_INIT);
   },
-
+  simpleCut: function(){
+    append(config.PAPER_PART_CUT);
+  },
   beep: function(){
     if (printerConfig.type == 'star'){
       console.error("Beep not supported on STAR yet");

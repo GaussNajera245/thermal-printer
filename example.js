@@ -1,5 +1,10 @@
 var printer = require("./node-thermal-printer");
 
+var currency = v => {
+  const options = { style: "currency", currency: 'BRL'};
+  return (new Intl.NumberFormat("pt-BR", options).format(v));
+}
+
 printer.init({
   type: 'epson',
   interface: '/dev/usb/lp0',
@@ -10,9 +15,7 @@ printer.init({
 
 printer.alignCenter();
 
-  printer.println("NÃO PREÇO BÚXI");
-
-printer.cut();
+printer.simpleCut();
 
 printer.execute(function(err){
   if (err) {
