@@ -191,8 +191,8 @@ module.exports = {
   drawLine: function(){
     // module.exports.newLine();
     for(var i=0; i<printerConfig.width; i++){
-      if(printerConfig.lineChar) append(new Buffer(printerConfig.lineChar));
-      else append(new Buffer([196]));
+      if(printerConfig.lineChar) append(Buffer.from(printerConfig.lineChar));
+      else append(Buffer.from([196]));
     }
     module.exports.newLine();
   },
@@ -201,7 +201,7 @@ module.exports = {
     append(left.toString());
     var width = printerConfig.width - left.toString().length - right.toString().length;
     for(var i=0; i<width; i++){
-      append(new Buffer(" "));
+      append(Buffer.from(" "));
     }
     append(right.toString());
     module.exports.newLine();
@@ -213,7 +213,7 @@ module.exports = {
       append(data[i].toString());
       var spaces = cellWidth - data[i].toString().length;
       for(var j=0; j<spaces; j++){
-        append(new Buffer(" "));
+        append(Buffer.from(" "));
       }
     }
     module.exports.newLine();
@@ -244,17 +244,17 @@ module.exports = {
       if(obj.align == "CENTER"){
         var spaces = (cellWidth - obj.text.toString().length) / 2;
         for(var j=0; j<spaces; j++){
-          append(new Buffer(" "));
+          append(Buffer.from(" "));
         }
         if(obj.text != '')  append(obj.text);
         for(var j=0; j<spaces-1; j++){
-          append(new Buffer(" "));
+          append(Buffer.from(" "));
         }
 
       } else if(obj.align == "RIGHT") {
         var spaces = cellWidth - obj.text.toString().length;
         for(var j=0; j<spaces; j++){
-          append(new Buffer(" "));
+          append(Buffer.from(" "));
         }
         if(obj.text != '') append(obj.text);
 
@@ -262,7 +262,7 @@ module.exports = {
         if(obj.text != '') append(obj.text);
         var spaces = cellWidth - obj.text.toString().length;
         for(var j=0; j<spaces; j++){
-          append(new Buffer(" "));
+          append(Buffer.from(" "));
         }
 
       }
@@ -361,9 +361,9 @@ module.exports = {
       var lsb = parseInt(s % 256);
       var msb = parseInt(s / 256);
 
-      append(new Buffer([lsb, msb]));  // nL, nH
-      append(new Buffer(str.toString()));  // Data
-      append(new Buffer([0x0a])); // NL (new line)
+      append(Buffer.from([lsb, msb]));  // nL, nH
+      append(Buffer.from(str.toString()));  // Data
+      append(Buffer.from([0x0a])); // NL (new line)
 
 
       // [Name] Print QR code
@@ -410,8 +410,8 @@ module.exports = {
       var s = str.length + 3;
       var lsb = parseInt(s % 256);
       var msb = parseInt(s / 256);
-      append(new Buffer([0x1d, 0x28, 0x6b, lsb, msb, 0x31, 0x50, 0x30]));
-      append(new Buffer(str));
+      append(Buffer.from([0x1d, 0x28, 0x6b, lsb, msb, 0x31, 0x50, 0x30]));
+      append(Buffer.from(str));
 
 
       // [Name] Print the symbol data in the symbol storage area
@@ -435,7 +435,7 @@ module.exports = {
       // [Range] 1 ≤ n ≤ 255
       // [Default] n = 162
       // [Description] Selects the height of the bar code as n dots.
-      //append(new Buffer([162]));
+      //append(Buffer.from([162]));
 
       // [Name] Print bar code
       // [Code]  (1) 1D 6B m d1...dk 00
@@ -467,18 +467,18 @@ module.exports = {
       // 71   CODEBAR(NW7)    1 <= k <= 255    48 <= d <= 57, 65 <= d <= 68, d = 36, 43, 45, 46, 47, 58
       // 72   CODE93          1 <= k <= 255     0 <= d <= 127
       // 73   CODE128         2 <= n <= 255     0 <= d <= 127
-      //append(new Buffer([0x1d, 0x6B, 73]));
-      //append(new Buffer([data.length]));
-      //append(new Buffer(data));
+      //append(Buffer.from([0x1d, 0x6B, 73]));
+      //append(Buffer.from([data.length]));
+      //append(Buffer.from(data));
 
-      //append(new Buffer([0x1d, 0x6B, 50]));
-      //append(new Buffer([0x1d, 0x77, 2]));
-      //append(new Buffer([0x1d, 0x48, 2]));
+      //append(Buffer.from([0x1d, 0x6B, 50]));
+      //append(Buffer.from([0x1d, 0x77, 2]));
+      //append(Buffer.from([0x1d, 0x48, 2]));
 
-      append(new Buffer([0x1d, 0x6B, 0x49]));
-      append(new Buffer([data.length+1]));
-      append(new Buffer(data));
-      append(new Buffer([0x10]));
+      append(Buffer.from([0x1d, 0x6B, 0x49]));
+      append(Buffer.from([data.length+1]));
+      append(Buffer.from(data));
+      append(Buffer.from([0x10]));
 
     }
   },
@@ -515,14 +515,14 @@ module.exports = {
       }
 
       // Barcode height
-      if(settings && settings.height) append(new Buffer([settings.height]));
-      else append(new Buffer([0x50]));
+      if(settings && settings.height) append(Buffer.from([settings.height]));
+      else append(Buffer.from([0x50]));
 
       // Barcode data
-      append(new Buffer(data.toString()));
+      append(Buffer.from(data.toString()));
 
       // Append RS(record separator)
-      append(new Buffer([0x1e]));
+      append(Buffer.from([0x1e]));
     } else {
 
       if (settings) {
@@ -533,13 +533,13 @@ module.exports = {
         else if(settings.text == 4) append(config.BARCODE_CODE128_TEXT_4);
         else append(config.BARCODE_CODE128_TEXT_2);
 
-        if (settings.height && settings.height <= 255) append(new Buffer([0x1d, 0x68, settings.height]));
-        else append(new Buffer([0x1d, 0x68, 120]));
+        if (settings.height && settings.height <= 255) append(Buffer.from([0x1d, 0x68, settings.height]));
+        else append(Buffer.from([0x1d, 0x68, 120]));
       }
-      append(new Buffer([0x1d, 0x6b, 74]));
-      append(new Buffer([data.length+1]));
-      append(new Buffer(data));
-      append(new Buffer([0x10]));
+      append(Buffer.from([0x1d, 0x6b, 74]));
+      append(Buffer.from([data.length+1]));
+      append(Buffer.from(data));
+      append(Buffer.from([0x10]));
     }
   },
 
@@ -567,7 +567,7 @@ module.exports = {
         pixels.push(line);
       }
 
-      var imageBuffer = new Buffer([]);
+      var imageBuffer = Buffer.from([]);
       for (var i = 0; i < this.height; i++) {
         for (var j = 0; j < parseInt(this.width/8); j++) {
           var byte = 0x0;
@@ -583,7 +583,7 @@ module.exports = {
             }
           }
 
-          imageBuffer = Buffer.concat([imageBuffer, new Buffer([byte])]);
+          imageBuffer = Buffer.concat([imageBuffer, Buffer.from([byte])]);
         }
       }
 
@@ -596,11 +596,11 @@ module.exports = {
       // yH = (this.height >> 8) & 0xff;
       // https://reference.epson-biz.com/modules/ref_escpos/index.php?content_id=94
 
-      append(new Buffer ([0x1d, 0x76, 0x30, 48]));
-      append(new Buffer ([(this.width >> 3) & 0xff]));
-      append(new Buffer ([0x00]));
-      append(new Buffer ([this.height & 0xff]));
-      append(new Buffer ([(this.height >> 8) & 0xff]));
+      append(Buffer.from ([0x1d, 0x76, 0x30, 48]));
+      append(Buffer.from ([(this.width >> 3) & 0xff]));
+      append(Buffer.from ([0x00]));
+      append(Buffer.from ([this.height & 0xff]));
+      append(Buffer.from ([(this.height >> 8) & 0xff]));
 
       // append data
       append(imageBuffer);
@@ -632,11 +632,11 @@ module.exports = {
         pixels.push(line);
       }
 
-      append(new Buffer([0x1b, 0x30]));
+      append(Buffer.from([0x1b, 0x30]));
 
       // v3
       for(var i = 0; i < Math.ceil(this.height/24); i++){
-        var imageBuffer = new Buffer([]);
+        var imageBuffer = Buffer.from([]);
         for(var y = 0; y < 24; y++){
 
           for (var j = 0; j < Math.ceil(this.width/8); j++) {
@@ -657,15 +657,15 @@ module.exports = {
               }
             }
 
-            imageBuffer = Buffer.concat([imageBuffer, new Buffer([byte])]);
+            imageBuffer = Buffer.concat([imageBuffer, Buffer.from([byte])]);
           }
         }
-        append(new Buffer([0x1b, 0x6b, parseInt(imageBuffer.length/24), 0x00]));
+        append(Buffer.from([0x1b, 0x6b, parseInt(imageBuffer.length/24), 0x00]));
         append(imageBuffer);
-        append(new Buffer("\n"));
+        append(Buffer.from("\n"));
       }
 
-      append(new Buffer([0x1b, 0x7a, 0x01]));
+      append(Buffer.from([0x1b, 0x7a, 0x01]));
 
       callback(true);
     });
@@ -712,19 +712,19 @@ module.exports = {
 
       // Set PDF417 bar code size
       // 1B 1D 78 53 30 n p1 p2
-      append(new Buffer([0x1b, 0x1d, 0x78, 0x53, 0x30, 0x00, 0x01, 0x02]));
+      append(Buffer.from([0x1b, 0x1d, 0x78, 0x53, 0x30, 0x00, 0x01, 0x02]));
 
       // Set PDF417 ECC (security level)
       // 1B 1D 78 53 31 n
-      append(new Buffer([0x1b, 0x1d, 0x78, 0x53, 0x31, 0x02]));
+      append(Buffer.from([0x1b, 0x1d, 0x78, 0x53, 0x31, 0x02]));
 
       // Set PDF417 module X direction size
       // 1B 1D 78 53 32 n
-      append(new Buffer([0x1b, 0x1d, 0x78, 0x53, 0x32, 0x02]));
+      append(Buffer.from([0x1b, 0x1d, 0x78, 0x53, 0x32, 0x02]));
 
       // Set PDF417 module aspect ratio
       // 1B 1D 78 53 33 n
-      append(new Buffer([0x1b, 0x1d, 0x78, 0x53, 0x33, 0x03]));
+      append(Buffer.from([0x1b, 0x1d, 0x78, 0x53, 0x33, 0x03]));
 
       // Set PDF417 bar code data
       // 1B 1D 78 44 nL nH d1 d2 … dk
@@ -732,15 +732,15 @@ module.exports = {
       var lsb = parseInt(s % 256);
       var msb = parseInt(s / 256);
 
-      append(new Buffer([0x1b, 0x1d, 0x78, 0x44]));
-      append(new Buffer([lsb, msb]));  // nL, nH
-      append(new Buffer(data.toString()));  // Data
-      append(new Buffer([0x0a])); // NL (new line)
+      append(Buffer.from([0x1b, 0x1d, 0x78, 0x44]));
+      append(Buffer.from([lsb, msb]));  // nL, nH
+      append(Buffer.from(data.toString()));  // Data
+      append(Buffer.from([0x0a])); // NL (new line)
 
 
       // Print PDF417 bar code
       // 1B 1D 78 50
-      append(new Buffer([0x1b, 0x1d, 0x78, 0x50]));
+      append(Buffer.from([0x1b, 0x1d, 0x78, 0x50]));
 
     } else {
       console.error("PDF417 not supported on EPSON yet");
@@ -842,13 +842,13 @@ var append = function(buff){
     var endBuff = null;
     for(var i=0; i<buff.length; i++){
       var value = buff[i];
-      var tempBuff = new Buffer(value);
+      var tempBuff = Buffer.from(value);
 
       // Replace special characters
       if(printerConfig.replaceSpecialCharacters) {
         for(var key in config.specialCharacters){
           if(value == key){
-            tempBuff = new Buffer([config.specialCharacters[key]]);
+            tempBuff = Buffer.from([config.specialCharacters[key]]);
             break;
           }
         }

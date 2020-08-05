@@ -11,7 +11,7 @@ printer.init({
 
 for(var i=33; i<255; i++){
   printer.print(i + ": ");
-  printer.add(new Buffer([i]));
+  printer.add(Buffer.from([i]));
   printer.print(", ");
 }
 

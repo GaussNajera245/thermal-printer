@@ -1,5 +1,5 @@
 {
-  "name": "thermal-printer",
+  "name": "hi-thermal-printer",
   "version": "1.0.5",
   "description": "Made to work with Epson and Star thermal printers",
   "main": "node-thermal-printer.js",
@@ -25,6 +25,7 @@
   "dependencies": {
     "net": "^1.0.2",
     "node-png": "^0.4.3",
+    "thermal-printer": "^1.0.5",
     "unorm": "^1.4.1",
     "write-file-queue": "0.0.1"
   }
